@@ -155,7 +155,7 @@ const PlatformLinks = () => {
                       src={platform.logo}
                       alt={`${platform.name} logo`}
                       className="w-8 h-8 md:w-10 md:h-10 filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300"
-                      priority={true}
+                      priority={false}
                     />
                   </motion.div>
                 </motion.div>

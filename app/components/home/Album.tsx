@@ -2,14 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  fadeInUp,
-  floatingVariants,
-  staggerContainer,
-  trackItemVariants,
-} from "@/app/lib/constants";
+import { fadeInUp, floatingVariants } from "@/app/lib/constants";
 import Picture from "../common/Picture";
-import { Heart, Music, Share2 } from "lucide-react";
+import { Check, Heart, Share2 } from "lucide-react";
+import { useIncreaseLikeCountMutation } from "@/app/redux/services/likeApi";
 
 interface IGenerateParticles {
   id: number;
@@ -22,12 +18,58 @@ const Album = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [audioVisualizer, setAudioVisualizer] = useState([]);
   const [particles, setParticles] = useState<IGenerateParticles[]>([]);
+  const [copied, setCopied] = useState(false);
 
-  const tracks = [
-    { id: 1, title: "Class War Cheer Squad", duration: "3:45" },
-    { id: 2, title: "Fight Back", duration: "4:12" },
-    { id: 3, title: "Burn", duration: "3:28" },
-  ];
+  const [increaseLinkCount] = useIncreaseLikeCountMutation();
+
+  const handleIncreaseLikeCount = async () => {
+    await increaseLinkCount({}).unwrap();
+    setIsLiked(true);
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: "The Iron Roses",
+      text: "Check out The Iron Roses - Epic rock music that will blow your mind! 🎸🔥",
+      url: "https://ironroses.vercel.app",
+    };
+
+    try {
+      // Try native share API first (mobile devices)
+      if (navigator.share) {
+        await navigator.share(shareData);
+        return; // Don't show copied state for native share
+      }
+
+      // Fallback to clipboard copy (desktop)
+      await navigator.clipboard.writeText("https://ironroses.vercel.app");
+      setCopied(true);
+
+      // Reset back to share icon after 2 seconds
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (err: any) {
+      // Handle share cancellation gracefully
+      if (err.name === "AbortError") {
+        // User canceled the share - do nothing, this is normal behavior
+        return;
+      }
+
+      // Handle other errors by falling back to clipboard copy
+      console.error("Share failed, trying clipboard fallback: ", err);
+      try {
+        await navigator.clipboard.writeText("https://ironroses.vercel.app");
+        setCopied(true);
+        setTimeout(() => {
+          setCopied(false);
+        }, 2000);
+      } catch (clipboardErr) {
+        console.error("Clipboard fallback also failed: ", clipboardErr);
+        // Silently fail - don't show error to user
+      }
+    }
+  };
 
   useEffect(() => {
     const generateParticles = () => {
@@ -87,7 +129,7 @@ const Album = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="mb-8 relative flex justify-center items-center group w-fit mx-auto"
         >
-          <div className="absolute inline-block z-10 group-hover:-translate-x-20 duration-500">
+          <div className="absolute inline-block z-10 group-hover:-translate-x-32 duration-500">
             <Picture
               src="/images/ep.jpg"
               alt="Iron Roses EP Cover"
@@ -97,7 +139,7 @@ const Album = () => {
           </div>
 
           {/* Vinyl Record that slides out */}
-          <motion.div className="w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 group-hover:translate-x-20 duration-500">
+          <motion.div className="w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 group-hover:translate-x-32 duration-500">
             <motion.div className="w-full h-full rounded-full bg-gradient-to-br from-gray-800 via-gray-900 to-black shadow-2xl relative overflow-hidden">
               <div className="absolute inset-0">
                 {[...Array(12)].map((_, i) => (
@@ -153,15 +195,16 @@ const Album = () => {
             The Iron Roses • {new Date().getFullYear()}
           </p>
           <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-lg mx-auto mb-6">
-            Experience the raw power and emotional depth of The Iron Roses&apos;
-            latest EP. A perfect blend of intensity and beauty that will leave
-            you breathless.
+            Delivering the raw power and emotional depth that is the backbone of
+            The Iron Roses, their latest ep &quot;AGITPOP&quot; perfectly blends
+            a politically-driven message of joy and rage with a melodic punch to
+            the gut.
           </p>
 
           {/* Action Buttons */}
           <div className="flex justify-center gap-4 mb-8">
             <motion.button
-              onClick={() => setIsLiked(!isLiked)}
+              onClick={handleIncreaseLikeCount}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className={`p-3 rounded-full border border-pink-500/30 transition-colors duration-300 ${
@@ -176,9 +219,23 @@ const Album = () => {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="p-3 rounded-full border border-pink-500/30 text-pink-400 hover:bg-pink-500/20 transition-colors duration-300"
+              onClick={handleShare}
+              className={`p-3 rounded-full border transition-all duration-300 ${
+                copied
+                  ? "border-green-500/50 text-green-400 bg-green-500/20"
+                  : "border-pink-500/30 text-pink-400 hover:bg-pink-500/20"
+              }`}
             >
-              <Share2 size={20} />
+              <motion.div
+                initial={false}
+                animate={{
+                  scale: copied ? [1, 1.2, 1] : 1,
+                  rotate: copied ? [0, 360] : 0,
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                {copied ? <Check size={20} /> : <Share2 size={20} />}
+              </motion.div>
             </motion.button>
           </div>
         </motion.div>
@@ -199,47 +256,6 @@ const Album = () => {
             />
           ))}
         </div>
-
-        {/* Track List */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="max-w-md mx-auto"
-        >
-          <div className="bg-black/50 backdrop-blur-sm rounded-xl p-6 border border-pink-500/20">
-            <h3 className="text-xl font-semibold text-white mb-4 flex items-center justify-center gap-2">
-              <Music size={20} />
-              Track List
-            </h3>
-
-            <div className="space-y-2">
-              {tracks.map((track, index) => (
-                <motion.div
-                  key={track.id}
-                  variants={trackItemVariants}
-                  whileHover={{ scale: 1.02, x: 5 }}
-                  className={`p-3 rounded-lg transition-all duration-300 flex items-center justify-between hover:bg-gray-800/50`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-pink-500/20 flex items-center justify-center">
-                      <span className="text-pink-400 text-sm font-medium">
-                        {index + 1}
-                      </span>
-                    </div>
-                    <span className="text-white font-medium">
-                      {track.title}
-                    </span>
-                  </div>
-                  <span className="text-gray-400 text-sm">
-                    {track.duration}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
     </motion.section>
   );

@@ -13,49 +13,49 @@ export const ironRosesPlatforms: IPlatformLink[] = [
   {
     name: "Spotify",
     url: "https://open.spotify.com/artist/4E39TiZAnl2g2uCpWI9L96",
-    logo: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spotify.svg",
+    logo: "/svg/spotify.svg",
     color: "#1DB954",
     category: "streaming",
   },
   {
     name: "Apple Music",
     url: "https://music.apple.com/us/artist/the-iron-roses/1654902863",
-    logo: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/applemusic.svg",
+    logo: "/svg/applemusic.svg",
     color: "#FA243C",
     category: "streaming",
   },
   {
     name: "Bandcamp",
     url: "https://theironroses.bandcamp.com/album/the-iron-roses",
-    logo: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/bandcamp.svg",
+    logo: "/svg/bandcamp.svg",
     color: "#629AA0",
     category: "store",
   },
   {
     name: "Bandsintown",
     url: "https://www.bandsintown.com/a/15498963-the-iron-roses",
-    logo: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/bandsintown.svg",
+    logo: "/svg/bandsintown.svg",
     color: "#00D4AA",
     category: "events",
   },
   {
     name: "YouTube",
     url: "https://music.youtube.com/channel/UCrgfyTO3wRoCI5_US5ONXWw",
-    logo: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg",
+    logo: "/svg/youtube.svg",
     color: "#FF0000",
     category: "streaming",
   },
   {
     name: "Instagram",
     url: "https://www.instagram.com/theironroses/?hl=en",
-    logo: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg",
+    logo: "/svg/instagram.svg",
     color: "#E4405F",
     category: "social",
   },
   {
     name: "Facebook",
     url: "https://www.facebook.com/TheIronRoses",
-    logo: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg",
+    logo: "/svg/facebook.svg",
     color: "#1877F2",
     category: "social",
   },
@@ -70,20 +70,19 @@ export const categories = [
 ];
 
 export const storeLinks = [
-  { name: "US Store", url: "https://theironroses.bigcartel.com" },
-  { name: "EU Store", url: "https://theironroses.bigcartel.com" },
+  { name: "Store", url: "https://theironroses.bigcartel.com" },
 ];
 
 export const contactLinks = [
-  { name: "Manager", email: "manager@ironroses.com", role: "Management" },
+  { name: "Manager", email: "jason@unchainedhq.com", role: "Management" },
   {
     name: "US Booking",
-    email: "booking-us@ironroses.com",
+    email: "matt@dynamictalent.com",
     role: "US Booking Agent",
   },
   {
     name: "EU Booking",
-    email: "booking-eu@ironroses.com",
+    email: "ara@destiny-tourbooking.com",
     role: "EU Booking Agent",
   },
 ];

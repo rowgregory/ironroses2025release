@@ -143,8 +143,7 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-gray-300 text-lg max-w-2xl mx-auto"
           >
-            Ready to book the show of a lifetime? Let&apos;s make some noise
-            together.
+            There is power in protest. Let&apos;s make some noise.
           </motion.p>
         </motion.div>
 
