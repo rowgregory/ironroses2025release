@@ -131,7 +131,7 @@ const Contact = () => {
           >
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent" />
             <span className="text-red-400 font-bold tracking-widest text-sm">
-              IRON ROSES
+              THE IRON ROSES
             </span>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent" />
           </motion.div>

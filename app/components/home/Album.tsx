@@ -132,7 +132,7 @@ const Album = () => {
           <div className="absolute inline-block z-10 group-hover:-translate-x-32 duration-500">
             <Picture
               src="/images/ep.jpg"
-              alt="Iron Roses EP Cover"
+              alt="The Iron Roses EP Cover"
               className="w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto object-cover rounded-xl shadow-2xl border border-pink-500/30"
               priority={true}
             />

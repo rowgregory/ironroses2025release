@@ -226,7 +226,7 @@ const PlatformLinks = () => {
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold rounded-full hover:from-pink-600 hover:to-purple-700 transition-all duration-300"
           >
-            Everything Iron Roses
+            Everything The Iron Roses
           </motion.a>
         </motion.div>
       </div>
