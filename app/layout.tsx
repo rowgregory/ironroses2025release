@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ironroses.vercel.app"),
-  title: "The Iron Roses – Agitpop",
+  metadataBase: new URL("https://theironroses.info"),
+  title: "The Iron Roses",
   description:
     "The Iron Roses’ new EP, Agitpop, delivers bold, emotionally charged punk anthems for those craving change, connection, and radical hope.",
   keywords: [
@@ -52,11 +52,11 @@ export const metadata: Metadata = {
     title: "The Iron Roses – Agitpop",
     description:
       "Agitpop is the latest EP from The Iron Roses – a raw, passionate collection of songs about struggle, resistance, and hope.",
-    url: "https://ironroses.vercel.app",
+    url: "https://theironroses.info",
     siteName: "The Iron Roses",
     images: [
       {
-        url: "https://firebasestorage.googleapis.com/v0/b/devon-hunt-nextjs.appspot.com/o/images%2Fironroses_rich_preview.png?alt=media&token=ca962953-b82e-4b77-aee5-887b8d7870ec",
+        url: "https://firebasestorage.googleapis.com/v0/b/coastal-referral-exchange.firebasestorage.app/o/images%2Fthe-iron-roses-rich-preview.png?alt=media&token=6939b1da-23e9-455d-b119-7cda063397a5",
         width: 1200,
         height: 630,
         alt: "The Iron Roses Agitpop cover",
@@ -73,14 +73,14 @@ export const metadata: Metadata = {
     "max-video-preview": -1,
     googleBot: "index, follow",
   },
-  applicationName: "The Iron Roses – Agitpop",
+  applicationName: "The Iron Roses",
   appleWebApp: {
-    title: "The Iron Roses – Agitpop",
+    title: "The Iron Roses",
     statusBarStyle: "default",
     capable: true,
   },
   alternates: {
-    canonical: "https://ironroses.vercel.app",
+    canonical: "https://theironroses.info",
   },
   other: {
     "apple-mobile-web-app-capable": "yes",
