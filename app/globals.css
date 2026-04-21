@@ -1,28 +1,80 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* ─── Theme — The Iron Roses ─────────────────────────────────────────── */
+@theme {
+  /* Primary accent — fuchsia */
+  --color-primary-light: #c026d3; /* fuchsia-600 */
+  --color-primary-dark: #e879f9; /* fuchsia-400 */
+
+  /* Secondary accent — violet */
+  --color-secondary-light: #7c3aed; /* violet-600 */
+  --color-secondary-dark: #a78bfa; /* violet-400 */
+
+  /* Sky accent (used for links, info states, highlights) */
+  --color-sky-light: #0ea5e9; /* sky-500 */
+  --color-sky-dark: #38bdf8; /* sky-400 */
+
+  /* Indigo accent (used for deep accents, gradients) */
+  --color-indigo-light: #4f46e5; /* indigo-600 */
+  --color-indigo-dark: #818cf8; /* indigo-400 */
+
+  /* Top utility bar */
+  --color-topbar-light: #0c0412; /* near black with fuchsia hint */
+  --color-topbar-dark: #07020d; /* near black with deep violet hint */
+
+  /* Main nav bar */
+  --color-navbar-light: #1a0a2e; /* dark violet-charcoal */
+  --color-navbar-dark: #100620; /* very dark violet-black */
+
+  /* Page background */
+  --color-bg-light: #ffffff; /* pure white */
+  --color-bg-dark: #060212; /* deep violet-black */
+
+  /* Card / surface */
+  --color-surface-light: #f5f3ff; /* violet-50 */
+  --color-surface-dark: #120824; /* dark violet surface */
+
+  /* Button */
+  --color-button-light: #1a0a2e; /* dark violet-charcoal */
+  --color-button-alt-light: #130720; /* deeper violet-charcoal */
+  --color-button-dark: #3b0764; /* deep violet-indigo */
+  --color-button-alt-dark: #2e0550; /* deep violet-black */
+
+  /* Borders */
+  --color-border-light: #ede9fe; /* violet-100 */
+  --color-border-dark: #2e1065; /* violet-950 */
+
+  /* Text */
+  --color-text-light: #09090b; /* zinc-950 — near black */
+  --color-text-dark: #fdf4ff; /* fuchsia-50 — soft warm white */
+
+  /* Muted text */
+  --color-muted-light: #71717a; /* zinc-500 — neutral gray */
+  --color-muted-dark: #c084fc; /* purple-400 — muted violet */
+
+  /* Legacy aliases */
+  --color-accent: #f5f3ff;
+  --color-accent-dark: #120824;
+
+  /* Stat labels */
+  --color-stat-label-light: #52525b; /* zinc-600 */
+  --color-stat-label-dark: #e879f9; /* fuchsia-400 */
+
+  --color-on-dark: #a1a1aa; /* zinc-400 — neutral gray for text on dark surfaces */
+}
+
+/* ─── BASE ──────────────────────────────────────────────────────────────────── */
+body {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-light);
+  font-family: var(--font-barlow-condensed), sans-serif;
+}
+
+.dark body {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+}
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
 }

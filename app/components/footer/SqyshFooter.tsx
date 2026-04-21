@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const SqyshFooter = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -29,9 +29,9 @@ const SqyshFooter = () => {
             .map((char) =>
               Math.random() < 0.3
                 ? glitchChars[Math.floor(Math.random() * glitchChars.length)]
-                : char
+                : char,
             )
-            .join("")
+            .join(""),
         );
       }, 100);
 

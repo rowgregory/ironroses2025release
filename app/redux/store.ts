@@ -3,13 +3,8 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { likeReducer } from "./features/likeSlice";
-import { api } from "./services/api";
 
-const rootReducer = combineReducers({
-  like: likeReducer,
-  [api.reducerPath]: api.reducer,
-});
+const rootReducer = combineReducers({});
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -17,7 +12,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       immutableCheck: false,
       serializableCheck: false,
-    }).concat(api.middleware),
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
