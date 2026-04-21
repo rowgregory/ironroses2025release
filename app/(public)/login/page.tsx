@@ -170,7 +170,7 @@ export default function LoginPage() {
           {/* Privacy + Terms */}
           <div className="flex items-center justify-center gap-3 mt-4">
             <Link
-              href="/privacy"
+              href="/privacy-policy"
               className="text-[9px] font-mono tracking-widest uppercase text-muted-dark/40 hover:text-muted-dark transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-dark rounded"
             >
               Privacy Policy
