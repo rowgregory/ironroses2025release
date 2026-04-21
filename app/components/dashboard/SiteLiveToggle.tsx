@@ -1,5 +1,6 @@
 import { toggleSiteLive } from "@/app/lib/actions/site-content/toggleSiteLive";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export function SiteLiveToggle({ initialIsLive }: { initialIsLive: boolean }) {
   const [isLive, setIsLive] = useState(initialIsLive);
@@ -19,31 +20,37 @@ export function SiteLiveToggle({ initialIsLive }: { initialIsLive: boolean }) {
           ◆ Site Status
         </p>
         <h2 className="text-sm font-mono font-black uppercase tracking-[0.08em] text-text-dark">
-          {isLive ? "Site is Live" : "Site is Seized"}
+          {isLive ? "Live" : "Offline"}
         </h2>
       </div>
 
-      <button
-        onClick={handleToggle}
-        disabled={status === "loading"}
-        className={[
-          "flex items-center gap-2 px-4 py-2 text-[9px] font-mono font-black tracking-[0.14em] uppercase border transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-dark disabled:opacity-40",
-          isLive
-            ? "border-red-500/50 text-red-400 hover:bg-red-500/10"
-            : "border-green-500/50 text-green-400 hover:bg-green-500/10",
-        ].join(" ")}
-        aria-label={isLive ? "Take site offline" : "Go live"}
-      >
-        <span
-          className={`w-1.5 h-1.5 rounded-full ${isLive ? "bg-green-400" : "bg-red-400"}`}
-          aria-hidden="true"
-        />
-        {status === "loading"
-          ? "Updating..."
-          : isLive
-            ? "Go Offline"
-            : "Go Live"}
-      </button>
+      <div className="flex items-center gap-3">
+        <span className="text-[9px] font-mono tracking-widest uppercase text-muted-dark">
+          {isLive ? "Go Offline" : "Go Live"}
+        </span>
+        <button
+          role="switch"
+          aria-checked={isLive}
+          aria-label={isLive ? "Take site offline" : "Go live"}
+          onClick={handleToggle}
+          disabled={status === "loading"}
+          className={[
+            "relative w-12 h-6 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-dark disabled:opacity-40",
+            isLive
+              ? "bg-green-500/30 border border-green-500/50"
+              : "bg-border-dark border border-border-dark",
+          ].join(" ")}
+        >
+          <motion.span
+            animate={{ x: isLive ? 6 : -18 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className={[
+              "absolute top-0.75 right-2.25 w-4 h-4 transition-colors duration-300",
+              isLive ? "bg-green-400" : "bg-muted-dark",
+            ].join(" ")}
+          />
+        </button>
+      </div>
     </div>
   );
 }

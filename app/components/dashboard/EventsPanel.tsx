@@ -93,17 +93,6 @@ export function EventsPanel({ events }: { events: Event[] }) {
                     <p className="text-[10px] font-mono text-muted-dark truncate pl-4">
                       {event.venue}
                     </p>
-                    {event.ticketUrl && (
-                      <a
-                        href={event.ticketUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 mt-1 pl-4 text-[9px] font-mono tracking-widest uppercase text-secondary-dark hover:text-primary-dark transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-dark rounded"
-                      >
-                        <Ticket size={9} aria-hidden="true" />
-                        Tickets
-                      </a>
-                    )}
                   </div>
 
                   {/* Sold out badge + delete */}
@@ -115,7 +104,7 @@ export function EventsPanel({ events }: { events: Event[] }) {
                     )}
                     <button
                       onClick={() => setEditingEvent(event)}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity text-muted-dark hover:text-secondary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-dark rounded"
+                      className="text-muted-dark hover:text-secondary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-dark rounded"
                       aria-label={`Edit ${event.city} event`}
                     >
                       <svg
@@ -134,7 +123,7 @@ export function EventsPanel({ events }: { events: Event[] }) {
                     </button>
                     <button
                       onClick={() => handleDelete(event.id)}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity text-muted-dark hover:text-red-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-dark rounded"
+                      className="text-muted-dark hover:text-red-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-dark rounded"
                       aria-label={`Delete ${event.city} event`}
                     >
                       <Trash2 size={13} aria-hidden="true" />
