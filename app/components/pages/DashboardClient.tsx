@@ -9,6 +9,7 @@ import { UsersList } from "../dashboard/UsersList";
 import { NewsletterSection } from "../dashboard/NewsletterSection";
 import { AccessCodeSection } from "../dashboard/AccessCodeSection";
 import { AccessCode } from "@prisma/client";
+import { SiteLiveToggle } from "../dashboard/SiteLiveToggle";
 
 export default function DashboardClient({
   currentUser,
@@ -18,6 +19,7 @@ export default function DashboardClient({
   siteContent,
   subscribers,
   accessCode,
+  isLive,
 }: {
   currentUser: any;
   users: any;
@@ -26,6 +28,7 @@ export default function DashboardClient({
   siteContent: any;
   subscribers: NewsletterSubscriber[];
   accessCode: AccessCode | null;
+  isLive: boolean;
 }) {
   return (
     <div className="min-h-screen bg-bg-dark font-mono relative overflow-x-hidden">
@@ -47,6 +50,8 @@ export default function DashboardClient({
 
       <div className="relative z-10 max-w-lg mx-auto px-4 pt-8 pb-16 flex flex-col gap-8">
         <Greeting currentUser={currentUser} />
+
+        <SiteLiveToggle initialIsLive={isLive} />
 
         <div className="flex items-center gap-3">
           <div className="h-px flex-1 bg-border-dark" />

@@ -13,7 +13,7 @@ export default async function DashboardPage() {
     users,
     events,
     userName,
-    siteContent,
+    { content: siteContent, isLive },
     subscribers,
     accessCode,
   ] = await Promise.all([
@@ -34,6 +34,7 @@ export default async function DashboardPage() {
       siteContent={siteContent}
       subscribers={subscribers.data}
       accessCode={accessCode.data}
+      isLive={isLive}
     />
   );
 }

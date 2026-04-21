@@ -99,6 +99,7 @@ model SiteContent {
   id        String   @id @default(cuid())
   slug      String   @unique
   content   Json
+  isLive    Boolean  @default(false)
   updatedAt DateTime @updatedAt
 }
 
