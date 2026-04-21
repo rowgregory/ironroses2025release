@@ -1,10 +1,33 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function LoginPage() {
+  const [error, setError] = useState<string | null>(null);
+
+  const handleGoogleSignIn = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    setError(null);
+
+    try {
+      await signIn("google", {
+        redirect: true,
+        redirectTo: "/login",
+      });
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "An unexpected error occurred";
+      setError(
+        message.includes("popup")
+          ? "Please allow popups and try again."
+          : "Unable to connect with Google. Please try again.",
+      );
+    }
+  };
+
   return (
     <div className="min-h-screen bg-bg-dark text-text-dark font-mono relative overflow-x-hidden flex items-center justify-center px-4">
       {/* Scanlines */}
@@ -137,9 +160,7 @@ export default function LoginPage() {
           </div>
 
           <button
-            onClick={() =>
-              signIn("google", { redirect: true, redirectTo: "/login" })
-            }
+            onClick={handleGoogleSignIn}
             className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-border-dark text-sm font-mono font-bold tracking-[0.08em] uppercase text-text-dark hover:bg-border-dark/30 hover:border-primary-dark/50 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-dark"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
@@ -162,6 +183,20 @@ export default function LoginPage() {
             </svg>
             <span>Continue with Google</span>
           </button>
+          <AnimatePresence>
+            {error && (
+              <motion.p
+                key="error"
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="text-[9px] font-mono text-red-400 text-center mt-3 tracking-[0.08em]"
+                role="alert"
+              >
+                ✗ {error}
+              </motion.p>
+            )}
+          </AnimatePresence>
 
           <p className="text-center text-[9px] font-mono text-muted-dark tracking-[0.08em] mt-6 leading-relaxed">
             New here? Sign in with Google and you'll be set up automatically.

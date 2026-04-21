@@ -132,7 +132,7 @@ export default function DashboardClient({
           </div>
 
           <a
-            href="https://analytics.google.com"
+            href="https://analytics.google.com/analytics/web/#/a392121314p534023717/reports/intelligenthome"
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 flex items-center gap-1.5 px-4 py-2 text-[9px] font-mono font-black tracking-[0.14em] uppercase border border-border-dark text-muted-dark hover:text-primary-dark hover:border-primary-dark transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-dark"
