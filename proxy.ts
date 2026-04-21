@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "./app/lib/auth";
 
-const publicRoutes = ["/login"];
+const publicRoutes = ["/login", "/privacy", "/terms"];
 const protectedAPIRoutes = ["/api/pdf/member-directory"];
 
 export async function proxy(req: NextRequest) {
@@ -30,14 +30,16 @@ export async function proxy(req: NextRequest) {
   const isSuperUserRoute = nextUrl.pathname.startsWith("/super");
   const isDashboardRoute = nextUrl.pathname.startsWith("/dashboard");
 
-  // ── Logged-in user hitting a public route → redirect to their home ────────
-  if (isLoggedIn && isPublicRoute) {
-    if (nextUrl.pathname === "/login") {
-      let dest = "/rosebud";
-      if (role === "SUPERUSER") dest = "/super";
-      else if (role === "ADMIN") dest = "/dashboard";
-      return NextResponse.redirect(new URL(dest, nextUrl));
-    }
+  // ── Logged-in user hitting /login → redirect to their home ────────────────
+  if (isLoggedIn && nextUrl.pathname === "/login") {
+    let dest = "/rosebud";
+    if (role === "SUPERUSER") dest = "/super";
+    else if (role === "ADMIN") dest = "/dashboard";
+    return NextResponse.redirect(new URL(dest, nextUrl));
+  }
+
+  // ── Other public routes — always allow ───────────────────────────────────
+  if (isPublicRoute) {
     return NextResponse.next();
   }
 
@@ -54,7 +56,7 @@ export async function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL(dest, nextUrl));
   }
 
-  // ── Non-admin/superuser hitting /dashboard → back to rosebud ─────────────
+  // ── ROSEBUD hitting /dashboard → back to rosebud ─────────────────────────
   if (isLoggedIn && isDashboardRoute && role === "ROSEBUD") {
     return NextResponse.redirect(new URL("/rosebud", nextUrl));
   }
